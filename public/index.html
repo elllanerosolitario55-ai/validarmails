@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Validator Internacional 🌎</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #0a0a0f;
+            --color-surface: #12121a;
+            --color-surface-2: #1a1a25;
+            --color-border: #2a2a3a;
+            --color-text: #e8e8f0;
+            --color-text-muted: #8888a0;
+            --color-primary: #6366f1;
+            --color-primary-glow: rgba(99, 102, 241, 0.3);
+            --color-success: #10b981;
+            --color-error: #ef4444;
+            --color-warning: #f59e0b;
+            --color-info: #3b82f6;
+            --color-europe: #3b82f6;
+            --color-north-america: #ef4444;
+            --color-central-america: #f59e0b;
+            --color-south-america: #10b981;
+            --color-caribbean: #8b5cf6;
+            --gradient-main: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #06b6d4 100%);
+            --shadow-glow: 0 0 60px rgba(99, 102, 241, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 60%);
+            animation: bgFloat 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes bgFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(-2%, 2%) rotate(1deg); }
+            50% { transform: translate(2%, -2%) rotate(-1deg); }
+            75% { transform: translate(-1%, -1%) rotate(0.5deg); }
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .globe-icon {
+            font-size: 3rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--color-text-muted);
+            font-size: 1.1rem;
+            margin-top: 0.5rem;
+            font-weight: 300;
+        }
+
+        .region-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .region-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .region-badge.europe { background: rgba(59, 130, 246, 0.2); color: var(--color-europe); }
+        .region-badge.north-america { background: rgba(239, 68, 68, 0.2); color: var(--color-north-america); }
+        .region-badge.central-america { background: rgba(245, 158, 11, 0.2); color: var(--color-central-america); }
+        .region-badge.south-america { background: rgba(16, 185, 129, 0.2); color: var(--color-south-america); }
+        .region-badge.caribbean { background: rgba(139, 92, 246, 0.2); color: var(--color-caribbean); }
+
+        .main-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-glow);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-section {
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            color: var(--color-text);
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 1.25rem;
+            background: var(--color-surface-2);
+            border: 2px solid var(--color-border);
+            border-radius: 12px;
+            color: var(--color-text);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px var(--color-primary-glow);
+        }
+
+        textarea::placeholder {
+            color: var(--color-text-muted);
+        }
+
+        .input-hint {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        .email-count {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--color-primary);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-main);
+            color: white;
+            box-shadow: 0 4px 20px var(--color-primary-glow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--color-primary-glow);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--color-surface-2);
+            color: var(--color-text);
+            border: 2px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-border);
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top-color: currentColor;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .progress-section.active {
+            display: block;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: var(--color-surface-2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-main);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .results-section {
+            margin-top: 2.5rem;
+            display: none;
+        }
+
+        .results-section.active {
+            display: block;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-card.valid .stat-value { color: var(--color-success); }
+        .stat-card.invalid .stat-value { color: var(--color-error); }
+        .stat-card.identified .stat-value { color: var(--color-primary); }
+        .stat-card.total .stat-value { color: var(--color-info); }
+
+        /* Region Stats */
+        .region-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .region-stat-card {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .region-stat-card .region-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+        }
+
+        .region-stat-card.europe .region-icon { background: rgba(59, 130, 246, 0.2); }
+        .region-stat-card.north-america .region-icon { background: rgba(239, 68, 68, 0.2); }
+        .region-stat-card.central-america .region-icon { background: rgba(245, 158, 11, 0.2); }
+        .region-stat-card.south-america .region-icon { background: rgba(16, 185, 129, 0.2); }
+        .region-stat-card.caribbean .region-icon { background: rgba(139, 92, 246, 0.2); }
+
+        .region-stat-info {
+            flex: 1;
+        }
+
+        .region-stat-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .region-stat-count {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .region-stat-card.europe .region-stat-count { color: var(--color-europe); }
+        .region-stat-card.north-america .region-stat-count { color: var(--color-north-america); }
+        .region-stat-card.central-america .region-stat-count { color: var(--color-central-america); }
+        .region-stat-card.south-america .region-stat-count { color: var(--color-south-america); }
+        .region-stat-card.caribbean .region-stat-count { color: var(--color-caribbean); }
+
+        /* Country breakdown */
+        .country-breakdown {
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .country-breakdown h3 {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            color: var(--color-text-muted);
+        }
+
+        .country-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .country-chip {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--color-bg);
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .country-chip .flag {
+            font-size: 1.2rem;
+        }
+
+        .country-chip .count {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--color-primary);
+            font-weight: 600;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
+            border: none;
+            border-radius: 8px 8px 0 0;
+            color: var(--color-text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tab:hover {
+            color: var(--color-text);
+        }
+
+        .tab.active {
+            background: var(--color-surface-2);
+            color: var(--color-text);
+        }
+
+        .tab-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: 0.5rem;
+        }
+
+        .tab.valid .tab-badge { background: rgba(16, 185, 129, 0.2); color: var(--color-success); }
+        .tab.invalid .tab-badge { background: rgba(239, 68, 68, 0.2); color: var(--color-error); }
+        .tab.identified .tab-badge { background: rgba(99, 102, 241, 0.2); color: var(--color-primary); }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .email-list {
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+        }
+
+        .email-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            border-bottom: 1px solid var(--color-border);
+            transition: background 0.2s ease;
+        }
+
+        .email-item:last-child {
+            border-bottom: none;
+        }
+
+        .email-item:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .email-status {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .email-status.valid { background: var(--color-success); box-shadow: 0 0 10px rgba(16, 185, 129, 0.5); }
+        .email-status.invalid { background: var(--color-error); box-shadow: 0 0 10px rgba(239, 68, 68, 0.5); }
+        .email-status.identified { background: var(--color-primary); box-shadow: 0 0 10px rgba(99, 102, 241, 0.5); }
+
+        .email-flag {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .email-address {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            flex: 1;
+            word-break: break-all;
+        }
+
+        .email-country {
+            font-size: 0.8rem;
+            color: var(--color-text-muted);
+            padding: 0.25rem 0.75rem;
+            background: var(--color-bg);
+            border-radius: 6px;
+        }
+
+        .email-reason {
+            font-size: 0.8rem;
+            color: var(--color-error);
+            max-width: 200px;
+            text-align: right;
+        }
+
+        .export-section {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-export {
+            padding: 0.75rem 1.5rem;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            color: var(--color-text);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-export:hover {
+            background: var(--color-border);
+            transform: translateY(-1px);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--color-text-muted);
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Filter region */
+        .filter-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-label {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            background: var(--color-surface-2);
+            color: var(--color-text-muted);
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--color-border);
+            color: var(--color-text);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            color: var(--color-text-muted);
+            font-size: 0.85rem;
+        }
+
+        footer a {
+            color: var(--color-primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .supported-countries {
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .main-card {
+                padding: 1.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .email-item {
+                flex-wrap: wrap;
+            }
+
+            .email-country,
+            .email-reason {
+                width: 100%;
+                text-align: left;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    <div class="bg-gradient"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="globe-icon">🌎</span>
+                <h1>Email Validator</h1>
+            </div>
+            <p class="subtitle">Verifica emails de Europa, América del Norte, Central y del Sur</p>
+            <div class="region-badges">
+                <span class="region-badge europe">🇪🇺 Europa</span>
+                <span class="region-badge north-america">🇺🇸 Norteamérica</span>
+                <span class="region-badge central-america">🇨🇷 Centroamérica</span>
+                <span class="region-badge caribbean">🇨🇺 Caribe</span>
+                <span class="region-badge south-america">🇧🇷 Sudamérica</span>
+            </div>
+        </header>
+
+        <main class="main-card">
+            <div class="input-section">
+                <div class="input-group">
+                    <label class="input-label" for="emailInput">
+                        📧 Introduce los emails a verificar
+                    </label>
+                    <textarea 
+                        id="emailInput" 
+                        placeholder="ejemplo@gmail.com&#10;usuario@empresa.es&#10;otro@hotmail.com&#10;test@uol.com.br&#10;&#10;Pega aquí tu lista de emails (uno por línea o separados por comas)..."
+                    ></textarea>
+                    <div class="input-hint">
+                        <span>111 países soportados • Europa, Américas y Caribe</span>
+                        <span class="email-count"><span id="emailCount">0</span> emails detectados</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-row">
+                <button class="btn btn-primary" id="validateBtn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Verificar Emails
+                </button>
+                <button class="btn btn-secondary" id="clearBtn">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                    </svg>
+                    Limpiar
+                </button>
+            </div>
+
+            <div class="progress-section" id="progressSection">
+                <div class="progress-header">
+                    <span id="progressText">Verificando emails...</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="results-section" id="resultsSection">
+                <div class="stats-grid">
+                    <div class="stat-card total">
+                        <div class="stat-value" id="statTotal">0</div>
+                        <div class="stat-label">Total</div>
+                    </div>
+                    <div class="stat-card valid">
+                        <div class="stat-value" id="statValid">0</div>
+                        <div class="stat-label">Válidos</div>
+                    </div>
+                    <div class="stat-card invalid">
+                        <div class="stat-value" id="statInvalid">0</div>
+                        <div class="stat-label">Inválidos</div>
+                    </div>
+                    <div class="stat-card identified">
+                        <div class="stat-value" id="statIdentified">0</div>
+                        <div class="stat-label">Identificados</div>
+                    </div>
+                </div>
+
+                <div class="region-stats" id="regionStats"></div>
+
+                <div class="country-breakdown" id="countryBreakdown" style="display: none;">
+                    <h3>📊 Desglose por País</h3>
+                    <div class="country-list" id="countryList"></div>
+                </div>
+
+                <div class="tabs">
+                    <button class="tab valid active" data-tab="valid">
+                        ✓ Válidos<span class="tab-badge" id="badgeValid">0</span>
+                    </button>
+                    <button class="tab invalid" data-tab="invalid">
+                        ✗ Inválidos<span class="tab-badge" id="badgeInvalid">0</span>
+                    </button>
+                    <button class="tab identified" data-tab="identified">
+                        🌍 Identificados<span class="tab-badge" id="badgeIdentified">0</span>
+                    </button>
+                </div>
+
+                <div class="filter-section" id="filterSection" style="display: none;">
+                    <span class="filter-label">Filtrar por región:</span>
+                    <div class="filter-buttons" id="filterButtons">
+                        <button class="filter-btn active" data-region="all">Todos</button>
+                    </div>
+                </div>
+
+                <div class="tab-content active" id="tabValid">
+                    <div class="email-list" id="listValid"></div>
+                </div>
+                <div class="tab-content" id="tabInvalid">
+                    <div class="email-list" id="listInvalid"></div>
+                </div>
+                <div class="tab-content" id="tabIdentified">
+                    <div class="email-list" id="listIdentified"></div>
+                </div>
+
+                <div class="export-section">
+                    <button class="btn-export" id="exportValid">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Exportar Válidos
+                    </button>
+                    <button class="btn-export" id="exportIdentified">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Exportar Identificados
+                    </button>
+                    <button class="btn-export" id="exportCSV">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Exportar CSV Completo
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Validador Internacional de Emails • 111 países y territorios soportados</p>
+            <p class="supported-countries">Europa 🇪🇺 • Norteamérica 🇺🇸🇨🇦🇲🇽 • Centroamérica • Caribe • Sudamérica 🇧🇷🇦🇷🇨🇱🇨🇴</p>
+            <p style="margin-top: 0.5rem;">Desplegado en <a href="https://www.netlify.com/" target="_blank">Netlify</a></p>
+        </footer>
+    </div>
+
+    <script>
+        // DOM Elements
+        const emailInput = document.getElementById('emailInput');
+        const emailCount = document.getElementById('emailCount');
+        const validateBtn = document.getElementById('validateBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const progressSection = document.getElementById('progressSection');
+        const progressText = document.getElementById('progressText');
+        const progressPercent = document.getElementById('progressPercent');
+        const progressFill = document.getElementById('progressFill');
+        const resultsSection = document.getElementById('resultsSection');
+
+        // Regional database (local fallback)
+        const REGIONAL_DATA = {
+            'Europe': { icon: '🇪🇺', class: 'europe' },
+            'North America': { icon: '🌎', class: 'north-america' },
+            'Central America': { icon: '🌎', class: 'central-america' },
+            'Caribbean': { icon: '🏝️', class: 'caribbean' },
+            'South America': { icon: '🌎', class: 'south-america' }
+        };
+
+        // Spanish TLDs and providers for fallback
+        const COUNTRY_PATTERNS = {
+            '.es': { code: 'ES', name: 'España', flag: '🇪🇸', region: 'Europe' },
+            '.de': { code: 'DE', name: 'Alemania', flag: '🇩🇪', region: 'Europe' },
+            '.fr': { code: 'FR', name: 'Francia', flag: '🇫🇷', region: 'Europe' },
+            '.it': { code: 'IT', name: 'Italia', flag: '🇮🇹', region: 'Europe' },
+            '.uk': { code: 'GB', name: 'Reino Unido', flag: '🇬🇧', region: 'Europe' },
+            '.pt': { code: 'PT', name: 'Portugal', flag: '🇵🇹', region: 'Europe' },
+            '.nl': { code: 'NL', name: 'Países Bajos', flag: '🇳🇱', region: 'Europe' },
+            '.be': { code: 'BE', name: 'Bélgica', flag: '🇧🇪', region: 'Europe' },
+            '.pl': { code: 'PL', name: 'Polonia', flag: '🇵🇱', region: 'Europe' },
+            '.ru': { code: 'RU', name: 'Rusia', flag: '🇷🇺', region: 'Europe' },
+            '.us': { code: 'US', name: 'Estados Unidos', flag: '🇺🇸', region: 'North America' },
+            '.ca': { code: 'CA', name: 'Canadá', flag: '🇨🇦', region: 'North America' },
+            '.mx': { code: 'MX', name: 'México', flag: '🇲🇽', region: 'North America' },
+            '.ar': { code: 'AR', name: 'Argentina', flag: '🇦🇷', region: 'South America' },
+            '.br': { code: 'BR', name: 'Brasil', flag: '🇧🇷', region: 'South America' },
+            '.cl': { code: 'CL', name: 'Chile', flag: '🇨🇱', region: 'South America' },
+            '.co': { code: 'CO', name: 'Colombia', flag: '🇨🇴', region: 'South America' },
+            '.pe': { code: 'PE', name: 'Perú', flag: '🇵🇪', region: 'South America' },
+            '.ve': { code: 'VE', name: 'Venezuela', flag: '🇻🇪', region: 'South America' },
+            '.cr': { code: 'CR', name: 'Costa Rica', flag: '🇨🇷', region: 'Central America' },
+            '.pa': { code: 'PA', name: 'Panamá', flag: '🇵🇦', region: 'Central America' },
+            '.cu': { code: 'CU', name: 'Cuba', flag: '🇨🇺', region: 'Caribbean' },
+            '.do': { code: 'DO', name: 'Rep. Dominicana', flag: '🇩🇴', region: 'Caribbean' }
+        };
+
+        // Disposable domains
+        const DISPOSABLE_DOMAINS = [
+            'tempmail.com', 'guerrillamail.com', 'mailinator.com', '10minutemail.com',
+            'throwaway.email', 'fakeinbox.com', 'trashmail.com', 'yopmail.com',
+            'temp-mail.org', 'getnada.com', 'mohmal.com', 'dispostable.com'
+        ];
+
+        // Results storage
+        let validationResults = {
+            valid: [],
+            invalid: [],
+            identified: [],
+            byCountry: {},
+            byRegion: {}
+        };
+
+        // Parse emails from input
+        function parseEmails(text) {
+            const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+            const matches = text.match(emailRegex) || [];
+            return [...new Set(matches.map(e => e.toLowerCase()))];
+        }
+
+        // Update email count
+        emailInput.addEventListener('input', () => {
+            const emails = parseEmails(emailInput.value);
+            emailCount.textContent = emails.length;
+        });
+
+        // Detect country from email (local fallback)
+        function detectCountryLocal(email) {
+            const domain = email.split('@')[1].toLowerCase();
+            for (const [pattern, data] of Object.entries(COUNTRY_PATTERNS)) {
+                if (domain.endsWith(pattern)) {
+                    return data;
+                }
+            }
+            return null;
+        }
+
+        // Check if email is from disposable domain
+        function isDisposable(email) {
+            const domain = email.split('@')[1].toLowerCase();
+            return DISPOSABLE_DOMAINS.some(dd => domain.includes(dd));
+        }
+
+        // Validate email format
+        function isValidFormat(email) {
+            const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return regex.test(email);
+        }
+
+        // Validate single email via API
+        async function validateEmail(email) {
+            try {
+                const response = await fetch('/.netlify/functions/validate-email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email })
+                });
+                return await response.json();
+            } catch (error) {
+                // Fallback to local validation
+                return localValidation(email);
+            }
+        }
+
+        // Local validation fallback
+        function localValidation(email) {
+            if (!isValidFormat(email)) {
+                return { valid: false, reason: 'Formato inválido', countryCode: null };
+            }
+            if (isDisposable(email)) {
+                return { valid: false, reason: 'Email temporal/desechable', countryCode: null };
+            }
+            const country = detectCountryLocal(email);
+            return { 
+                valid: true, 
+                reason: null, 
+                countryCode: country?.code || null,
+                countryName: country?.name || null,
+                countryFlag: country?.flag || null,
+                region: country?.region || null
+            };
+        }
+
+        // Main validation function
+        async function validateEmails() {
+            const emails = parseEmails(emailInput.value);
+            
+            if (emails.length === 0) {
+                alert('Por favor, introduce al menos un email válido');
+                return;
+            }
+
+            // Reset results
+            validationResults = { 
+                valid: [], 
+                invalid: [], 
+                identified: [],
+                byCountry: {},
+                byRegion: {}
+            };
+            
+            // Show progress
+            progressSection.classList.add('active');
+            resultsSection.classList.remove('active');
+            validateBtn.disabled = true;
+            validateBtn.innerHTML = '<div class="spinner"></div> Verificando...';
+
+            let processed = 0;
+            const total = emails.length;
+
+            // Process emails in batches
+            const batchSize = 5;
+            for (let i = 0; i < emails.length; i += batchSize) {
+                const batch = emails.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (email) => {
+                    const result = await validateEmail(email);
+                    const domain = email.split('@')[1];
+                    
+                    const emailData = {
+                        email,
+                        domain,
+                        ...result
+                    };
+
+                    if (result.valid) {
+                        validationResults.valid.push(emailData);
+                        if (result.countryCode) {
+                            validationResults.identified.push(emailData);
+                            
+                            // Count by country
+                            if (!validationResults.byCountry[result.countryCode]) {
+                                validationResults.byCountry[result.countryCode] = {
+                                    code: result.countryCode,
+                                    name: result.countryName,
+                                    flag: result.countryFlag,
+                                    region: result.region,
+                                    count: 0
+                                };
+                            }
+                            validationResults.byCountry[result.countryCode].count++;
+
+                            // Count by region
+                            if (result.region) {
+                                if (!validationResults.byRegion[result.region]) {
+                                    validationResults.byRegion[result.region] = 0;
+                                }
+                                validationResults.byRegion[result.region]++;
+                            }
+                        }
+                    } else {
+                        validationResults.invalid.push(emailData);
+                    }
+
+                    processed++;
+                    updateProgress(processed, total);
+                }));
+
+                // Small delay between batches
+                await new Promise(r => setTimeout(r, 100));
+            }
+
+            // Show results
+            showResults();
+            
+            // Reset button
+            validateBtn.disabled = false;
+            validateBtn.innerHTML = `
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Verificar Emails
+            `;
+        }
+
+        // Update progress bar
+        function updateProgress(current, total) {
+            const percent = Math.round((current / total) * 100);
+            progressFill.style.width = `${percent}%`;
+            progressPercent.textContent = `${percent}%`;
+            progressText.textContent = `Verificando ${current} de ${total} emails...`;
+        }
+
+        // Show results
+        function showResults() {
+            progressSection.classList.remove('active');
+            resultsSection.classList.add('active');
+
+            // Update stats
+            document.getElementById('statTotal').textContent = 
+                validationResults.valid.length + validationResults.invalid.length;
+            document.getElementById('statValid').textContent = validationResults.valid.length;
+            document.getElementById('statInvalid').textContent = validationResults.invalid.length;
+            document.getElementById('statIdentified').textContent = validationResults.identified.length;
+
+            // Update badges
+            document.getElementById('badgeValid').textContent = validationResults.valid.length;
+            document.getElementById('badgeInvalid').textContent = validationResults.invalid.length;
+            document.getElementById('badgeIdentified').textContent = validationResults.identified.length;
+
+            // Render region stats
+            renderRegionStats();
+
+            // Render country breakdown
+            renderCountryBreakdown();
+
+            // Render lists
+            renderEmailList('listValid', validationResults.valid, 'valid');
+            renderEmailList('listInvalid', validationResults.invalid, 'invalid');
+            renderEmailList('listIdentified', validationResults.identified, 'identified');
+
+            // Setup filters
+            setupFilters();
+        }
+
+        // Render region stats
+        function renderRegionStats() {
+            const container = document.getElementById('regionStats');
+            const regions = Object.entries(validationResults.byRegion);
+            
+            if (regions.length === 0) {
+                container.innerHTML = '';
+                return;
+            }
+
+            container.innerHTML = regions.map(([region, count]) => {
+                const data = REGIONAL_DATA[region] || { icon: '🌍', class: 'europe' };
+                return `
+                    <div class="region-stat-card ${data.class}">
+                        <div class="region-icon">${data.icon}</div>
+                        <div class="region-stat-info">
+                            <div class="region-stat-name">${region}</div>
+                            <div class="region-stat-count">${count}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Render country breakdown
+        function renderCountryBreakdown() {
+            const container = document.getElementById('countryBreakdown');
+            const list = document.getElementById('countryList');
+            const countries = Object.values(validationResults.byCountry)
+                .sort((a, b) => b.count - a.count);
+            
+            if (countries.length === 0) {
+                container.style.display = 'none';
+                return;
+            }
+
+            container.style.display = 'block';
+            list.innerHTML = countries.map(c => `
+                <div class="country-chip">
+                    <span class="flag">${c.flag || '🌍'}</span>
+                    <span class="name">${c.name}</span>
+                    <span class="count">${c.count}</span>
+                </div>
+            `).join('');
+        }
+
+        // Setup region filters
+        function setupFilters() {
+            const filterSection = document.getElementById('filterSection');
+            const filterButtons = document.getElementById('filterButtons');
+            const regions = Object.keys(validationResults.byRegion);
+
+            if (regions.length === 0) {
+                filterSection.style.display = 'none';
+                return;
+            }
+
+            filterSection.style.display = 'block';
+            filterButtons.innerHTML = `
+                <button class="filter-btn active" data-region="all">Todos</button>
+                ${regions.map(r => `<button class="filter-btn" data-region="${r}">${r}</button>`).join('')}
+            `;
+
+            // Add filter functionality
+            filterButtons.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterButtons.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterByRegion(btn.dataset.region);
+                });
+            });
+        }
+
+        // Filter by region
+        function filterByRegion(region) {
+            const filtered = region === 'all' 
+                ? validationResults.identified 
+                : validationResults.identified.filter(e => e.region === region);
+            renderEmailList('listIdentified', filtered, 'identified');
+        }
+
+        // Render email list
+        function renderEmailList(containerId, emails, type) {
+            const container = document.getElementById(containerId);
+            
+            if (emails.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                        </svg>
+                        <p>No hay emails en esta categoría</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = emails.map(item => `
+                <div class="email-item">
+                    <div class="email-status ${type}"></div>
+                    ${item.countryFlag ? `<span class="email-flag">${item.countryFlag}</span>` : ''}
+                    <span class="email-address">${item.email}</span>
+                    ${item.countryName ? `<span class="email-country">${item.countryName}</span>` : 
+                      `<span class="email-country">${item.domain}</span>`}
+                    ${item.reason ? `<span class="email-reason">${item.reason}</span>` : ''}
+                </div>
+            `).join('');
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                const tabName = tab.dataset.tab.charAt(0).toUpperCase() + tab.dataset.tab.slice(1);
+                document.getElementById(`tab${tabName}`).classList.add('active');
+
+                // Show/hide filter section
+                document.getElementById('filterSection').style.display = 
+                    tab.dataset.tab === 'identified' && Object.keys(validationResults.byRegion).length > 0 
+                        ? 'block' : 'none';
+            });
+        });
+
+        // Export functions
+        function downloadFile(content, filename, type = 'text/plain') {
+            const blob = new Blob([content], { type });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('exportValid').addEventListener('click', () => {
+            const emails = validationResults.valid.map(e => e.email).join('\n');
+            downloadFile(emails, 'emails_validos.txt');
+        });
+
+        document.getElementById('exportIdentified').addEventListener('click', () => {
+            const emails = validationResults.identified.map(e => e.email).join('\n');
+            downloadFile(emails, 'emails_identificados.txt');
+        });
+
+        document.getElementById('exportCSV').addEventListener('click', () => {
+            let csv = 'Email,Dominio,Valido,Pais,Region,Razon\n';
+            
+            [...validationResults.valid, ...validationResults.invalid].forEach(item => {
+                csv += `"${item.email}","${item.domain}","${item.valid ? 'Si' : 'No'}","${item.countryName || ''}","${item.region || ''}","${item.reason || ''}"\n`;
+            });
+            
+            downloadFile(csv, 'validacion_emails.csv', 'text/csv');
+        });
+
+        // Clear button
+        clearBtn.addEventListener('click', () => {
+            emailInput.value = '';
+            emailCount.textContent = '0';
+            progressSection.classList.remove('active');
+            resultsSection.classList.remove('active');
+            validationResults = { valid: [], invalid: [], identified: [], byCountry: {}, byRegion: {} };
+        });
+
+        // Validate button
+        validateBtn.addEventListener('click', validateEmails);
+    </script>
+</body>
+</html>

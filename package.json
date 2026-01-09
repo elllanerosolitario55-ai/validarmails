@@ -1,0 +1,23 @@
+{
+  "name": "email-validator-es",
+  "version": "1.0.0",
+  "description": "Validador de emails activos y válidos de España",
+  "main": "netlify/functions/validate-email.js",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required'",
+    "deploy": "netlify deploy --prod"
+  },
+  "keywords": [
+    "email",
+    "validator",
+    "spain",
+    "españa",
+    "netlify"
+  ],
+  "author": "Nando",
+  "license": "MIT",
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}
